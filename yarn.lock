@@ -9038,6 +9038,11 @@ react-refresh@^0.8.3:
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.8.3.tgz#721d4657672d400c5e3c75d063c4a85fb2d5d68f"
   integrity sha512-X8jZHc7nCMjaCqoU+V2I0cOhNW+QMBwSUkeXnTi8IPe6zaRWfn60ZzvFDZqWPfmSJfjub7dDW1SP0jaHWLu/hg==
 
+react-rxjs-elements@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/react-rxjs-elements/-/react-rxjs-elements-0.0.6.tgz#3686fc32db4a4a9e41be1d70c892de7a7b8ca45f"
+  integrity sha512-TZGDs4aja1e593boAcQN9RXuCR7iZay5QGkecYobm91dIFdck+4UmHBd0gLo9KMvlXIo0IjMUxgS3DyDf7S7QA==
+
 react-scripts@4.0.3:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/react-scripts/-/react-scripts-4.0.3.tgz#b1cafed7c3fa603e7628ba0f187787964cb5d345"

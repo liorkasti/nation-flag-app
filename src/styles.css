@@ -41,6 +41,32 @@
   }
 }
 
-div { 
+div {
   margin: 5px;
+}
+
+h1 {
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+button {
+  font-size: 1.5rem;
+}
+
+li {
+  text-transform: capitalize;
+}
+
+.loading {
+  opacity: 0.5;
+  font-style: italic;
+}
+
+.error {
+  border: red 1px solid;
+}
+
+.flag {
+    width: 36
 }

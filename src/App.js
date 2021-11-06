@@ -9,11 +9,11 @@ const App = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // useEffect for fetching data on mount
-  useEffect(() => {
+  // useMemo for fetching data on mount
+  useMemo(() => {
     fetch(api)
       .then((response) => response.json())
-      .then((data) => setData(data), console.log("data: ", data));
+      .then((data) => setData(data));
     setLoading(true);
   }, []);
 
@@ -25,7 +25,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>Italia</h1>
+      <h1>REST COUNTRIES</h1>
       <input
         type="text"
         placeholder="Search a country by name"
@@ -34,7 +34,10 @@ const App = () => {
       />
       {loading ? (
         data.map((nation) => (
-          <div key={nation.name.common}>{nation.name.common}</div>
+          <div key={nation.name.common}>
+            <img src={nation.flags.svg} style={{ width: 26 }} alt="flag" />
+            {`  ${nation.name.common}`}
+          </div>
         ))
       ) : (
         <div>
