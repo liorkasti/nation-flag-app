@@ -23,7 +23,7 @@ _______________________________________________
 
 ### TODOs:
 
-| Number | Description |
+| No. | Description |
 | ------ | ------ |
 | 1 | use fromFetch instead of fetch |
 | 2 | fix display search results |
