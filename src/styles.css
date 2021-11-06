@@ -68,5 +68,20 @@ li {
 }
 
 .flag {
-    width: 36
+  width: 36;
+}
+
+.container {
+  flex-direction: column;
+  width: 500;
+  margin: 20px 0 20px 38vw;
+  align-items: center;
+}
+
+.list-item {
+  text-align: left;
+
+  /* display: flex; */
+  /* text-align: left; */
+  /* width: 100rem; */
 }
