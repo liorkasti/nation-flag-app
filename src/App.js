@@ -22,7 +22,6 @@ import generic_flag from "./assets/flag_generic.png";
 
 const API = `https://restcountries.com/`;
 const VERSION = 'v3.1/';
-// https://restcountries.com/v2/name/
 
 const useObservable = (observable, setter) => {
   useEffect(() => {
@@ -99,8 +98,8 @@ const App = () => {
   }, [search, result]);
 
   const renderNations = (items) => {
-    if (!isEmpty(items)) {
-      console.log('items :>> ', items);
+    console.log('items :>> ', items);
+    if (items)
       return items.data.map(item =>
         <div key={item.id}>
           <button
@@ -117,7 +116,6 @@ const App = () => {
           </button>
         </div >
       );
-    } else return [];
   };
 
   return (
