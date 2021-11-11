@@ -1,8 +1,7 @@
-
-
 import React, { useState, useEffect, useMemo } from "react";
 import { from, BehaviorSubject, of } from "rxjs";
 import { filter, debounceTime, mergeMap, distinctUntilChanged, tap, catchError } from "rxjs/operators";
+
 import "./styles.css";
 import loader from "./assets/loader.gif";
 import refresh from "./assets/refresh.png";
@@ -11,13 +10,11 @@ import generic_flag from "./assets/flag_generic.png";
 /*  TODOS: 
   [1] use fromFetch instead of fetch
   [2] fix display search results not found
-  [3] validate flag and use generic flag (andorra)
-  [4] display the flag in a new screen click on country and store in an internal IndexDB
-  [5] sort the data by display from IndexDB first
-  [6] store the data items as an immutable.js object
-  [7] use SASS/SCSS 
-  [8] use Unit tests
-  [9] 
+  [3] validate flag respong url and use generic flag if not found
+  [4] display the flag in a new screen click on country and store in an internal IndexdDB
+  [5] sort the data by display from the IndexedDB first
+  [6] enhance styling using SASS/SCSS 
+  [7] use Unit tests
 */
 
 const API = `https://restcountries.com/`;
@@ -27,9 +24,7 @@ const useObservable = (observable, setter) => {
   useEffect(() => {
     let subscription = observable.subscribe(data => {
       setter({ data });
-      console.log('data>>>>', data);
     });
-
     return () => subscription.unsubscribe();
   }, [observable, setter]);
 };
@@ -49,19 +44,19 @@ const init = async (baseURL) => {
   } catch (err) { console.log(err); };
 }
 
-let searchSubject = new BehaviorSubject("");
+let searchSubject = new BehaviorSubject([]);
 let searchResultsObservable = searchSubject.pipe(
   filter((value) => value.length > 1),
   debounceTime(750),
   distinctUntilChanged(),
   mergeMap(value => from(serchByName(value))),
-  tap((ev) => console.log("ev " + JSON.stringify(ev))),
+  tap(ev => console.log(JSON.stringify(ev))),
   catchError(() => of(<div className="err">ERROR</div>)),
 );
 
 const serchByName = async (name) => {
   try {
-    const results = await fetch(API + VERSION + `name/${name.toLowerCase()}`)
+    const results = await fetch(API + VERSION + `name/${name}`)
       .then(res => res.json())
       .then(res => filterData(res));
     if (!isEmpty(results))
@@ -93,18 +88,15 @@ const App = () => {
   // useMemo for search results
   useMemo(() => {
     searchSubject.next(search);
-    console.log("search : ", search);
-    console.log("result : ", result);
-  }, [search, result]);
+  }, [search]);
 
   const renderNations = (items) => {
-    console.log('items :>> ', items);
     if (items)
       return items.data.map(item =>
-        <div key={item.id}>
+        <div key={item.id} id="getName">
           <button
             style={{ backgroundColor: 'transparent', border: 'transparent' }}
-            onClick={() => console.log('item.id :>> ', item.name)}
+            onClick={() => console.log('item.id :>> ', item.name)} //TODO: display the flag in a new screen, add to local IndexedDB storage and sort the output list by whats in storage first
           >
             <img src={item.flag} style={{ width: 26 }} alt="flag" />
             {`    ${item.name}    `}
@@ -150,7 +142,6 @@ const App = () => {
 };
 
 const filterData = async (res) => {
-  // console.log('res :>> ', res);
   try {
     let results = [];
     !isEmpty(res) &&
@@ -158,7 +149,7 @@ const filterData = async (res) => {
         results.push({
           id: Math.random().toString(36).slice(-5),
           name: nation.name.common,
-          flag: !isEmpty(nation.flags) && !isEmpty(nation.flags.svg) //&& isValidURL(nation.flags.svg)
+          flag: !isEmpty(nation.flags) && !isEmpty(nation.flags.svg) && isValidURL(nation.flags.svg)
             ?
             nation.flags.svg
             :

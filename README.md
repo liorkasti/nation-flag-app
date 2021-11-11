@@ -25,14 +25,12 @@ _______________________________________________
 
 | No. | Description |
 | ------ | ------ |
-| 1 | use fromFetch instead of fetch |
-| 2 | fix display search results |
-| 3 | filter results to emitte only name and flag   |
-| 4 | validate flag and use generic flag (andorra) |
-| 5 | display the country flag in a new screen and store the object by using Memoize and an internal IndexDB |
-| 6 | sort the data by display from IndexDB first |
-| 7 | store the data items as an immutable.js object |
-| 8 | use SASS/SCSS  |
-| 9 | use Unit tests |
+| 1 | use fromFetch instead of fetch|
+| 2 | fix display search results not found|
+| 3 | validate flag respong url and use generic flag if not found|
+| 4 | display the flag in a new screen click on country and store in an internal IndexdDB|
+| 5 | sort the data by display from the IndexedDB first|
+| 6 | enhance styling using SASS/SCSS|
+| 7 | use Unit tests|
 
 Enjoy! thank you.
